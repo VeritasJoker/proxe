@@ -112,6 +112,7 @@ dropdownButton <- function(
                            button_group = "liquid", # e.g. 'liquid' vs 'solid', or for use on some other tab.
                            ...,
                            width = NULL) {
+
   status <- match.arg(status)
   css_id <- paste0("dropdownButton-", button_group, "-", label)
   # dropdown button content

@@ -1,24 +1,38 @@
 library(readxl)
 
+solid_xlsx = "ProXe_NIBRX_models_annotations_20190329_sk_xl2011.xlsx"
+
 ## read in solid metadata as solid_meta
 
 solid_meta <- readxl::read_excel(
-  file.path(data_outside_app_dir, "NIBR_PDX_annotation_ProXe_23May2016.xlsx"),
+  file.path(data_outside_app_dir, solid_xlsx),
   sheet = "Header_Data"
 )
 
-
-# setwd("/Users/scott/Dropbox/PRoXe/PRoXe_app")
-
 solid <- readxl::read_excel(
-  file.path(data_outside_app_dir, "NIBR_PDX_annotation_ProXe_23May2016.xlsx"),
+  file.path(data_outside_app_dir, solid_xlsx),
   sheet = 1
 )
-solid <- data.frame(lapply(solid, as.factor))
-solid$Sample <- as.character(solid$Sample)
+
+match_vector = c("MODELID" = "PDX_Name",  
+  "HISTOLOGY"="COSMIC_Type",
+  "PRIMARY_SITE"="COSMIC_Primary_Site", 
+  "HIST_SUBTYPE1"="COSMIC_Subtype")
+
+# swap solid_meta$Internal_Column_Header names and colnames(solid)
+
+for (name in names(match_vector)) {
+  if (name %in% colnames(solid)){
+    colnames(solid)[colnames(solid) == name] <- match_vector[name]
+  }
+  if (name %in% solid_meta$Internal_Column_Header) {
+    solid_meta$Internal_Column_Header[solid_meta$Internal_Column_Header == name] <- match_vector[name]
+  }
+}
+
 # change sample prefix
-solid$Sample <- gsub("X-", "NIBR-", solid$Sample)
-names(solid) <- c("PDX_Name", "COSMIC_Primary_Site", "COSMIC_Type", "COSMIC_Subtype")
+solid$PDX_Name <- gsub("^", "NIBR-", solid$PDX_Name)
+
 
 # add availability column manually
 solid$Distribution_Permissions <- "academic, industry-sponsored academic, and industry"
@@ -190,7 +204,16 @@ names(gao_muts)[1] <- "PDX_Name"
 # solid <- merge(solid,grp,by="Sample")
 solid <- merge(solid, gao_muts, by = "PDX_Name")
 rm(gao_muts)
-names(solid) <- gsub(pattern = "_", replacement = " ", x = names(solid))
+
+
+##-- Switch to PRoXe_Column_Header -- ##
+
+# convert column names from PRIMAGRAFTS name to desired PRoXe name
+# order 'meta' by 'meta$Interal_Column_Header' matching names(df)
+solid_meta <- solid_meta[match(names(solid), solid_meta$Internal_Column_Header), ]
+if (!all(names(solid) == solid_meta$Internal_Column_Header)) stop("ordering incorrect")
+names(solid) <- solid_meta$PRoXe_Column_Header
+
 
 ## -- choose which columns should be visible, invisible, etc. -- ##
 
@@ -217,3 +240,8 @@ solid <- solid[, solid_meta2$PRoXe_Column_Header]
 categ_count <- table(solid_meta2$Visible_Invisible)
 condVis_ind_solid <- unname(categ_count["ob_vis"] + 1) # marks beginning of cond vis
 obInvisRet_ind_solid <- unname(condVis_ind + categ_count["cond_vis"]) # marks beginning of invis but retained
+
+## change appropriate columns to type ##
+solid <- as.data.frame(solid)
+solid <- convert.magic(solid, solid_meta2$Data_Type)
+
