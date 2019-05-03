@@ -14,6 +14,7 @@ ui_solid_tumors_database_explorer <- function() {
             style = "display: flex;",
             tags$h4("First, select columns to show:", style = "margin-right: 15px; font-weight: bold;"),
             mydropdownButton("administrative", solid_meta2, condVis_ind_solid, button_group = "solid", solid),
+            mydropdownButton("patient", solid_meta2, condVis_ind_solid, button_group = "solid", solid),
             mydropdownButton("tumor", solid_meta2, condVis_ind_solid, button_group = "solid", solid),
             mydropdownButton("pdx", solid_meta2, condVis_ind_solid, button_group = "solid", solid)
           )
@@ -103,10 +104,10 @@ ui_solid_tumors_database_explorer <- function() {
               selected = "COSMIC Primary Site"
             ),
             selectInput("solid_scatbox_num", "Numeric to plot", sort(names(solid)[solid_numeric_cols_vis]),
-              selected = "PDX_Mutations_Count"
+              selected = "Age"
             ),
             selectInput("solid_scatbox_log", "Numeric axis scaling", c("linear", "log"),
-              selected = "log"
+              selected = "linear"
             )
           ),
           #                # Option 5: contingency table of categories
