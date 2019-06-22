@@ -30,6 +30,14 @@ server_liquid_tumors_pdx_gene_expression <- function(input, output, server) {
 
       # print(paste("debug: input$rna_genes =",input$rna_genes))
       # weird output: `[1] "debug: input$rna_genes = AKT3" "debug: input$rna_genes = TP53" "debug: input$rna_genes = EGFR"`
+      
+      validate(
+        need(
+          nrow(rnamat_sub3) > 1 &
+            ncol(rnamat_sub3) > 1,
+          "Please select at least two genes and two samples."
+        )
+      )
 
       # normalize RNA-seq data various ways #TODO more
       rnamat_sub3log2 <- log(rnamat_sub3 + 0.01, 2)
@@ -47,6 +55,12 @@ server_liquid_tumors_pdx_gene_expression <- function(input, output, server) {
         margins = c(19, 16), # widens margins around plot
         col = my_palette, # use on color palette defined earlier
         # breaks=col_breaks,    # enable color transition at specified limits
+        cexRow = min(1.5, 0.2 + 1 / log10(
+          nrow(rnamat_sub3log2)
+        )),
+        cexCol = min(1.5, 0.2 + 1 / log10(
+          ncol(rnamat_sub3log2)
+        )),
         keysize = 0.75,
         dendrogram = "both"
       ) # ,     # only draw a row dendrogram
@@ -85,4 +99,12 @@ server_liquid_tumors_pdx_gene_expression <- function(input, output, server) {
       }
     }
   })
+  
+  output$ui_plot_rna <- renderUI(
+    plotOutput(
+      "plot_rna",
+      height = input$liquid_pdx_gene_expression_plot_height,
+      width = input$liquid_pdx_gene_expression_plot_width
+    )
+  )
 }

@@ -34,6 +34,14 @@ server_solid_tumors_pdx_gene_expression <- function(input, output, session) {
       } else if (input$sampleInput_solid == "click") {
         gao_rna3 <- gao_rna2[, colnames(gao_rna2) %in% rnamat_names]
       }
+      
+      validate(
+        need(
+          nrow(gao_rna3) > 1 &
+            ncol(gao_rna3) > 1,
+          "Please select at least two genes and two samples."
+        )
+      )
 
       print("didcomehere6_solid")
 
@@ -145,6 +153,7 @@ server_solid_tumors_pdx_gene_expression <- function(input, output, session) {
         annotation_col = annotation_row
         # ,annotation_colors=ann_colors
       )
+      
     } else if (input$expType_solid == "bar") {
       # subset gao_rna2 by gene, then transpose
       if (input$across_bar_solid == "samples") {
@@ -177,4 +186,12 @@ server_solid_tumors_pdx_gene_expression <- function(input, output, session) {
       }
     }
   })
+  
+  output$ui_plot_rna_solid <- renderUI(
+    plotOutput(
+      "plot_rna_solid",
+      height = input$solid_pdx_gene_expression_plot_height,
+      width = input$solid_pdx_gene_expression_plot_width
+    )
+  )
 }

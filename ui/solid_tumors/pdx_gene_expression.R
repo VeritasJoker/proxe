@@ -5,6 +5,25 @@ ui_solid_tumors_pdx_gene_expression <- function() {
     sidebarLayout(
       sidebarPanel(
         width = 3,
+        
+        sliderInput(
+          inputId = "solid_pdx_gene_expression_plot_height",
+          label = "Plot height (px)",
+          min = 600,
+          max = 1600,
+          step = 100,
+          value = 800
+        ),
+        
+        sliderInput(
+          inputId = "solid_pdx_gene_expression_plot_width",
+          label = "Plot width (px)",
+          min = 600,
+          max = 1600,
+          step = 100,
+          value = 1300
+        ),
+        
         # log(RPKM) or Z-score
         radioButtons(
           "z_log_solid", "Type of data to plot",
@@ -97,7 +116,7 @@ ui_solid_tumors_pdx_gene_expression <- function() {
         )
       ),
       mainPanel(
-        plotOutput("plot_rna_solid", height = 800, width = 1300)
+        uiOutput("ui_plot_rna_solid")
       )
     )
   )

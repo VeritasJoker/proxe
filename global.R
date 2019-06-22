@@ -10,11 +10,16 @@ library(gplots)
 library(RColorBrewer)
 library(plyr)
 library(ComplexHeatmap)
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(markdown)
 
 # for loading of objects to be used in both ui.R and server.R
 # a la http://shiny.rstudio.com/articles/scoping.html
 
 loadedGlobal <- load("pre-compiled.RData")
+
 print(loadedGlobal)
 
 # developer code for manually stepping through all loaded objects

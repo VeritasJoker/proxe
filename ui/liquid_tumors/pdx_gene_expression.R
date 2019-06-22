@@ -5,6 +5,25 @@ ui_liquid_tumors_pdx_gene_expression <- function() {
     sidebarLayout(
       sidebarPanel(
         width = 3,
+        
+        sliderInput(
+          inputId = "liquid_pdx_gene_expression_plot_height",
+          label = "Plot height (px)",
+          min = 600,
+          max = 1600,
+          step = 100,
+          value = 1300
+        ),
+        
+        sliderInput(
+          inputId = "liquid_pdx_gene_expression_plot_width",
+          label = "Plot width (px)",
+          min = 600,
+          max = 1600,
+          step = 100,
+          value = 1300
+        ),
+        
         radioButtons(
           "expType", "Graph type",
           c("Heatmap (2+ genes and samples)" = "heat", "Barplot (1 gene or sample)" = "bar"),
@@ -91,7 +110,7 @@ ui_liquid_tumors_pdx_gene_expression <- function() {
         helpText("Files last updated 1/10/2019")
       ),
       mainPanel(
-        plotOutput("plot_rna", height = 1300, width = 1300)
+        uiOutput("ui_plot_rna")
       )
     )
   )
