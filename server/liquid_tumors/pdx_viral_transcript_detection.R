@@ -84,6 +84,12 @@ server_liquid_tumors_pdx_viral_transcript_detection <-
           trace = "none",
           margins = c(19, 16),
           col = my_palette,
+          cexRow = min(1.5, 0.2 + 1 / log10(
+            nrow(virusseq_matrix_selected_lines)
+          )),
+          cexCol = min(1.5, 0.2 + 1 / log10(
+            ncol(virusseq_matrix_selected_lines)
+          )),
           keysize = 0.75,
           dendrogram = "column",
           Rowv = FALSE
@@ -98,6 +104,12 @@ server_liquid_tumors_pdx_viral_transcript_detection <-
           trace = "none",
           margins = c(19, 16),
           col = my_palette,
+          cexRow = min(1.5, 0.2 + 1 / log10(
+            nrow(virusseq_matrix_selected_lines)
+          )),
+          cexCol = min(1.5, 0.2 + 1 / log10(
+            ncol(virusseq_matrix_selected_lines)
+          )),
           key = FALSE,
           dendrogram = "column",
           Rowv = FALSE
