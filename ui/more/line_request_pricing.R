@@ -10,7 +10,7 @@ ui_more_line_requests_pricing <- function() {
       h2("Pricing:"),
       dataTableOutput("pricing"),
       br(),
-      p("Note: Prices increased on 9/1/17 to cover costs. All orders placed before this date will be honored at the original price."),
+      p("Note: Prices were updated on 8/29/19. All orders placed before this date will be honored at the original price."),
       p(strong("Shipping:"), "For domestic shipments, shipping fees are calculated by shipment zone (zone 2-16, based on FedEx Standard Overnight).
             For international shipments, shipping fees are calculated using FedEx Rate Tools prior to submitting a billing estimate (based on FedEx International First rates.)"),
       p(
