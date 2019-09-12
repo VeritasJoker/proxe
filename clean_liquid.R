@@ -144,6 +144,9 @@ df$Age <- gsub(pattern = "pediatric", replacement = 9.111, x = df$Age)
 df$Age <- gsub(pattern = "10.00-17.99", replacement = 15.555, x = df$Age)
 df$Age <- round(as.numeric(df$Age), 3)
 
+# remove pediatric data for "Brief Clinical Summary" and "Prior Treatment"
+df[df$Age < 18 & !is.na(df$Age),c("Brief_Clinical_Summary","Prior_Treatment")] <- NA
+
 # remove 80+ ages because they are PHI. Changing all to 81.
 df$Age[which(df$Age >= 80)] <- 81
 
