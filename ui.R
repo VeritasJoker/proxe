@@ -52,6 +52,9 @@ shinyUI(
       ui_more_faq()
     )
     # navbarPage options
-    , position = "fixed-top", collapsible = TRUE
+    , position = "fixed-top", collapsible = TRUE,
+
+    # popup
+    useShinyalert()
   )
 )
