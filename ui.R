@@ -26,6 +26,7 @@ shinyUI(
       ui_liquid_tumors_database_explorer(),
       ui_liquid_tumors_pdx_gene_expression(),
       ui_liquid_tumors_pdx_viral_transcript_detection(),
+      ui_liquid_tumors_pdx_gene_fusion_predictions(),
       ui_liquid_tumors_pdx_mutations(),
       ui_liquid_tumors_contingency_table(),
       ui_liquid_tumors_line_report(),
@@ -51,6 +52,9 @@ shinyUI(
       ui_more_faq()
     )
     # navbarPage options
-    , position = "fixed-top", collapsible = TRUE
+    , position = "fixed-top", collapsible = TRUE,
+
+    # popup
+    useShinyalert()
   )
 )

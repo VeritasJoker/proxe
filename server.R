@@ -269,4 +269,21 @@ shinyServer(function(input, output, session) { # TODO: read on what 'session' me
       height = "800px"
     )
   })
+
+  # popup
+  shinyalert(
+    title = "Hi there!",
+    text = "PRoXe data are currently migrating from shinyapps.io to a PRoXe instance of cBioPortal. During this transition, updates to data here will be infrequent. We look forward to letting you know when the migration to cBioPortal is complete. For more information, just <br><a href=\"mailto:proxe.feedback@gmail.com?Subject=cBioPortal transition\">send us an email</a>.<br>Sincerely, the PRoXe Team",
+    closeOnEsc = TRUE,
+    closeOnClickOutside = FALSE,
+    html = TRUE,
+    type = "success",
+    showConfirmButton = TRUE,
+    showCancelButton = FALSE,
+    confirmButtonText = "OK",
+    confirmButtonCol = "#AEDEF4",
+    timer = 0,
+    imageUrl = "",
+    animation = TRUE
+  )
 })
