@@ -56,7 +56,7 @@ server_liquid_tumors_pdx_mutations <- function(input, output, server) {
       ),
       show_annotation_name = TRUE
       # ,colname = anno_text(vmeta$pdx_name, rot = 90, just = "right", offset = unit(1, "npc") - unit(2, "mm")),
-      # annotation_height = unit.c(unit(5, "mm"), max_text_width(vmeta$pdx_name) + unit(2, "mm"))
+      ,height = unit.c(unit(5, "mm"), max_text_width(vmeta$pdx_name) + unit(2, "mm"))
     )
 
     col <- c(snv = "red", indel = "blue", splice = "yellow")
@@ -76,8 +76,8 @@ server_liquid_tumors_pdx_mutations <- function(input, output, server) {
       row_title_gp = gpar(fontsize = 10),
       column_title_gp = gpar(fontsize = 10),
       column_names_gp = gpar(fontsize = 10),
-      bottom_annotation = ba,
-      bottom_annotation_height = unit(length(cols_to_show) * 4, "mm")
+      bottom_annotation = ba
+      #,bottom_annotation_height = unit(length(cols_to_show) * 4, "mm")
     )
   })
 
