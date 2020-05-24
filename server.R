@@ -273,7 +273,7 @@ shinyServer(function(input, output, session) { # TODO: read on what 'session' me
   # popup
   shinyalert(
     title = "Hi there!",
-    text = "PRoXe data are currently migrating from shinyapps.io to a PRoXe instance of cBioPortal. During this transition, updates to data here will be infrequent. We look forward to letting you know when the migration to cBioPortal is complete. For more information, just <br><a href=\"mailto:proxe.feedback@gmail.com?Subject=cBioPortal transition\">send us an email</a>.<br>Sincerely, the PRoXe Team",
+    text = "Effective May 1, 2020, PRoXe development has migrated to a PRoXe instance of cBioPortal. This legacy Shiny app will remain accessible until May 1, 2025 but will not receive further updates. <br><br>To view current PRoXe data, <a target=\"_blank\" href=\"https://docs.google.com/forms/d/e/1FAIpQLSe0ccf_xoGZJyqM2xwj-_0oxraxK87ZrkAeWaDOx-usRECXdA/viewform\">register for a cBioPortal account here</a>. Note that a Gmail account is required. <br><br>Please <a href=\"mailto:proxe.feedback@gmail.com?Subject=cBioPortal transition\">reach out</a> with any questions.<br><br>Sincerely, the PRoXe Team",
     closeOnEsc = TRUE,
     closeOnClickOutside = FALSE,
     html = TRUE,
